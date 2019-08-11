@@ -1,0 +1,9 @@
+.NewAsset form {
+    padding-bottom: 15px;
+  }
+  
+  .NewAsset form textarea {
+    height: 300px;
+    font-size: 24px;
+  }
+  
