@@ -1,68 +1,43 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with Create React App
 
-## Available Scripts
-
-In the project directory, you can run:
+After you npm install, in the project directory, you can run:
 
 ### `npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+This application has been deployed in S3 bucket and can be accessed through [https://inventory-app-client.s3.amazonaws.com/index.html](https://inventory-app-client.s3.amazonaws.com/index.html). This connects to your backend serverless API's. In order to securely login in your application I have AWS Cognito.
 
-### `npm test`
+You would get login screen. I have created couple of user for you to login and test the application. Once you login you would see home screen where we show inventory asset details. Each Asset has a minimum of Asset Name, dimensions (Asset Width, Asset Height), status (active, inactive), Shopping Center its associated with as per the requirement. 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You can also search/ filterby AssetName and ShopName. As you select from select box the type of search please enter user input and click search to filter out based upon the exact value (Please use exact value for now to search your data. For example: OhhMedia1 works ohhMedia1 or Ohhmedia1 will give you empty response). We use API (https://n7gqnawcrg.execute-api.us-east-1.amazonaws.com/prod/assets/search) to get the search results. 
 
-### `npm run build`
+In order to add new Shop or Asset you click the links as shown. Each of the respective screen has an userinput to create a new shop or asset. In the creat new asset screen I am calling (https://n7gqnawcrg.execute-api.us-east-1.amazonaws.com/prod/shop) service to populate list of shopping centers where you can store an asset. To Create Asset or Create Shop i have created services :
+https://n7gqnawcrg.execute-api.us-east-1.amazonaws.com/prod/shop \
+https://n7gqnawcrg.execute-api.us-east-1.amazonaws.com/prod/assets \ 
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In order to edit existing asset you can click on the Asset Name. It will fetch your asset from service (https://n7gqnawcrg.execute-api.us-east-1.amazonaws.com/prod/assets/{id}) where id is taken from path parameters. 
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+As per the requirement you can change the status active/ inactive (i have just given text input for now. Customer should be usually given select option to restrict to two options only).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+As per the give requirement:
 
-### `npm run eject`
+1. MUST have an API server written in JavaScript (Completed, used lambda's)
+2. MUST have routes for Shopping Centres (Completed, created 4 services CRUD operations)
+3. MUST have routes for Assets (Completed, created 4 services CRUD operations)
+4. MUST persist data to a database using some flavour of SQL (Completed, Used DynamodDB in this use case).
+5. MUST be secured against anonymous access (Completed, Used AWS Congnito and storing data against the customer id)
+6. MUST contain tests using a testing framework (used serverless-bundle testes only for coupld of test cases)
+7. SHOULD track which user makes changes to the data (Completed)
+8. SHOULD allow marking Assets “inactive” for when they’re receiving maintenance, and re-activating them later (Completed, currenlty user enters those values)
+9. COULD have a UI (but don’t worry about UX) (Completed)
+10. COULD support searching for Assets by Name, Shopping Center or Status. (Completed. Havn't done for status but works with Assets and Shopping Center).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
